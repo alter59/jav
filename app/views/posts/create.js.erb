@@ -1,0 +1,17 @@
+<!--alert($('.timestamp').val());-->
+
+var times = $('.timestamp').val().replace(/\n(?=[a-zA-Z])/g, "&").replace(/\n/g, "").split('&');
+times.forEach(function(item) {
+   var url = 'https://allorigins.me/get?url=https://www.r18.com/videos/vod/movies/detail/-/id=1' + item.replace(/:.*/, "").replace(/-/, "").toLowerCase() .replace(/(?<=[A-Za-z])(?=\d)/, "00") + '/';
+
+});
+
+	<!--$.get(url, function(response) {-->
+ <!-- var htmltext = response.contents;-->
+ <!-- var actresses = htmltext.match(/(?<=(<span itemprop="name">)).*(?=<)/g);-->
+ <!-- $.each(actresses, function( i, name ) {-->
+ <!--  alert(name);-->
+ <!-- });-->
+ <!-- var title = htmltext.match(/(?<=(<cite itemprop="name">)).*(?=<\/cite>)/);-->
+ <!--   alert(title[0].replace(/&#039;/g, "'"));-->
+ <!-- });-->

@@ -1,0 +1,8 @@
+<%= simple_form_for @post, :remote => true do |f| %>
+  <div class="field">
+    <%= f.input :title, label: false, placeholder: "Title", input_html: { class: 'input-lg' } %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Leave Comment" %>
+  </div>
+<% end %>

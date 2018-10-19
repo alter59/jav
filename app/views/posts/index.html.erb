@@ -1,0 +1,74 @@
+<nav>
+  <% @studios.each do |studio| %>
+    <ul> <span class="list-header"><%= studio.name.upcase %></span>
+      <% studio.posts.order(:title).each do |post| %>
+        <li><a href="#<%= post.title.downcase %>" data-turbolinks="false"><%= post.title.upcase %></a></li>
+      <% end %>
+    </ul>
+    
+    <hr>
+  <% end %>
+</nav>
+  
+<div class="wrapper">
+  
+  
+  <div class="screen-center">
+  <!--<div class="form">-->
+  <!--  <%= simple_form_for @post do |f| %>-->
+  <!--    <div class="studio-select">-->
+  <!--      <%= f.association :studio, collection: Studio.order(:name), prompt: "Choose a Studio", label: false, input_html: { class: 'input_select' } %>-->
+  <!--    </div>-->
+  <!--    <%= f.input :title, label: false, placeholder: "Title", input_html: { class: 'input-lg' } %>-->
+  <!--    <%= f.input :thumb, label: false, placeholder: "Thumb", input_html: { class: 'input-lg' } %>-->
+  <!--    <%= f.input :model, label: false, placeholder: "Model", input_html: { class: 'input-lg' } %>-->
+  <!--    <%= f.input :res, label: false, placeholder: "Res", input_html: { class: 'input-lg' } %>-->
+  <!--    <%= f.input :time, label: false, placeholder: "Time", input_html: { class: 'input-lg' } %>-->
+  <!--    <div class="rippleParent new">-->
+  <!--      <%= f.button :submit, class: 'btn-lg btn-info btn-block ripple upload-button' %>-->
+  <!--    </div>-->
+  <!--  <% end %>-->
+
+  <!--</div>-->
+  
+    <%= simple_form_for @post, :remote => true do |f| %>
+    <div class="field">
+      <%= f.input :title, label: false, as: :text, placeholder: "Title", input_html: { class: 'input-lg timestamp' } %>
+    </div>
+    <div class="rippleParent new">
+      <%= f.button :submit, class: 'btn-lg btn-info btn-block ripple upload-button' %>
+    </div>
+    <% end %>
+  </div>
+  <a id="new_post">New Post</a>
+  
+  <% @studios.each do |studio| %>
+    <section id="<%= studio.name.downcase %>">
+      <div class="section-title"><%= studio.name.upcase %></div>
+      <hr>
+      <% studio.posts.order(:title).each do |post| %>
+          
+          <div class="section-body" id="<%= post.title.downcase %>">
+    
+          <div class="title"><%= post.title.upcase %></div>
+          <img src="<%= post.thumb %>" alt="<%= post.title.upcase %>" class="thumb">
+          <% if post.model.include? "," %>
+            <% post.model.split(', ').each do |m| %>
+              <div class="models"><a href="#<%= m.downcase.gsub(/\s+/, "") %>" data-turbolinks="false"><%= m %></a></div>
+            <% end %>
+          <% else %>
+            <div class="models"><a href="#<%= post.model.downcase.gsub(/\s+/, "") %>" data-turbolinks="false"><%= post.model %></a></div>
+          <% end %>
+          <div class="res"><%= post.res %></div>
+          <div class="time">
+            <%= post.time %>
+          </div>
+          <hr class="divider">
+            
+          </div>
+ 
+      <% end %>
+    </section>
+  <% end %>
+
+</div>
